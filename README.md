@@ -1,4 +1,2 @@
-# school
-Gigi's School Repository
-
-git config --global credential.helper wincred
+# delta
+Team Delta (Josip, Denis, Anur)
