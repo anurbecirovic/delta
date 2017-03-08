@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace Billing.Api.Controllers
 {
     [RoutePrefix("api/products")]
-    public class ProductController : BaseController
+    public class ProductsController : BaseController
     {
         [Route("")]
         public IHttpActionResult Get()

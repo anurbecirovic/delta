@@ -14,6 +14,7 @@ namespace Billing.Api.Models
             context = _context;
         }
 
+        //All together
         public AgentModel Create(Agent agent)
         {
             return new AgentModel()
@@ -24,6 +25,7 @@ namespace Billing.Api.Models
             };
         }
 
+        //All together
         public CategoryModel Create(Category category)
         {
             return new CategoryModel()
@@ -34,6 +36,7 @@ namespace Billing.Api.Models
             };
         }
 
+        //All together
         public ProductModel Create(Product product)
         {
             return new ProductModel()
@@ -47,6 +50,7 @@ namespace Billing.Api.Models
             };
         }
 
+        //Denis
         public SupplierModel Create(Supplier supplier)
         {
             return new SupplierModel()
@@ -59,6 +63,7 @@ namespace Billing.Api.Models
 
         }
 
+        //Denis
         public TownModel Create(Town town)
         {
             return new TownModel()
@@ -72,6 +77,7 @@ namespace Billing.Api.Models
 
         }
 
+        //Denis
         public ItemModel Create(Item item)
         {
             return new ItemModel()
@@ -81,8 +87,64 @@ namespace Billing.Api.Models
                 Price = item.Price,
                 SubTotal = item.SubTotal
             };
-
         }
+
+        //Anur
+        public ProcurementsModel Create(Procurement procurements)
+        {
+            return new ProcurementsModel()
+            {
+                Id = procurements.Id,
+                Document = procurements.Document,
+                Date = procurements.Date,
+                Quantity = procurements.Quantity,
+                Price = procurements.Price,
+                Product = procurements.Product.Name,
+                Supplier = procurements.Supplier.Name
+            };
+        }
+
+        //Josip
+        public ShipperModel Create(Shipper shipper)
+        {
+            return new ShipperModel()
+            {
+                Id = shipper.Id,
+                Name = shipper.Name,
+                Address = shipper.Address,
+                Invoices = shipper.Invoices.Select(x => x.InvoiceNo).ToList()
+            };
+        }
+
+        //Josip
+        public CustomerModel Create(Customer customer)
+        {
+            return new CustomerModel()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Address = customer.Address,
+                Town = customer.Town.Name,
+                Invoices = customer.Invoices.Select(x => x.InvoiceNo).ToList()
+            };
+        }
+
+        //Josip
+        public InvoiceModel Create(Invoice invoice)
+        {
+            return new InvoiceModel()
+            {
+                Id = invoice.Id,
+                InvoiceNo = invoice.InvoiceNo,
+                Date = invoice.Date,
+                Shipper = invoice.Shipper.Name,
+                Customer = invoice.Customer.Name,
+                Agent = invoice.Agent.Name,
+                Total = invoice.Total,
+                Shipping = invoice.Shipping
+            };
+        }
+
     }
 }
 
