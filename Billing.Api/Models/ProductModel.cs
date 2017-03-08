@@ -5,16 +5,13 @@ using System.Web;
 
 namespace Billing.Api.Models
 {
-    public class AgentModel
+    public class ProductModel
     {
-        public AgentModel()
-        {
-            Towns = new List<string>();
-        }
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<string> Towns { get; set; }
+        public string Unit { get; set; }
+        public double Price { get; set; }
+        public string Category { get; set; }
+        public int Stock { get; set; }
     }
 }
-
-
