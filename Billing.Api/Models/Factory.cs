@@ -1,4 +1,5 @@
 ﻿using Billing.Database;
+using Billing.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,11 @@ namespace Billing.Api.Models
 {
     public class Factory
     {
+        private UnitOfWork _unitOfWork;
+        public Factory(UnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
         private BillingContext context;
         public Factory(BillingContext _context)
         {
@@ -125,7 +131,19 @@ namespace Billing.Api.Models
                 Name = customer.Name,
                 Address = customer.Address,
                 Town = customer.Town.Name,
-                Invoices = customer.Invoices.Select(x => x.InvoiceNo).ToList()
+                Invoices = customer.Invoices.Select(x => x.InvoiceNo).ToList(),
+                TownId = customer.Town.Id
+            };
+        }
+
+
+        public Customer Create(CustomerModel model)
+        {
+            return new Customer()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Address = model.Address,
             };
         }
 

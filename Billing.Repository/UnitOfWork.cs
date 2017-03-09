@@ -52,6 +52,10 @@ namespace Billing.Repository
         public IBillingRepository<Supplier> Suppliers { get { return _suppliers ?? (_suppliers = new BillingRepository<Supplier>(_context)); } }
         public IBillingRepository<Town> Towns { get { return _towns ?? (_towns = new BillingRepository<Town>(_context)); } }
 
+        public void Commit()
+        {
+            _context.SaveChanges(); //UnitOfWork nam omogućava da imamo ovaj jedan commit. 
+        }
         public void Dispose()
         {
             _context.Dispose();
