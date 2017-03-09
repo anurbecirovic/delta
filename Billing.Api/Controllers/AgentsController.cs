@@ -34,7 +34,7 @@ namespace Billing.Api.Controllers
             return Ok(Factory.Create(agent));
         }
 
-        [Route("{id}")]
+        [Route("")]
         public IHttpActionResult Post([FromBody]Agent agent)
         {
             try
@@ -49,7 +49,7 @@ namespace Billing.Api.Controllers
             }
         }
 
-
+        [Route("{id}")]
         public IHttpActionResult Put([FromUri] int id, [FromBody]Agent agent)//FromUri i FromBody možemo i ne moramo pisati, podrazumijeva se.
         {
             try
@@ -63,5 +63,22 @@ namespace Billing.Api.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [Route("{id}")]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                UnitOfWork.Agents.Delete(id);
+                UnitOfWork.Commit();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

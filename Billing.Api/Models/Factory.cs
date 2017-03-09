@@ -57,6 +57,7 @@ namespace Billing.Api.Models
         }
 
         //Denis
+        //Entity to Model
         public SupplierModel Create(Supplier supplier)
         {
             return new SupplierModel()
@@ -68,6 +69,20 @@ namespace Billing.Api.Models
             };
 
         }
+
+        //Model to Entity
+        public Supplier Create(SupplierModel model)
+        {
+            return new Supplier()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Address = model.Address
+                //Fali nam ovdje i iz kojeg grada je Supplier
+            };
+        }
+
+
 
         //Denis
         public TownModel Create(Town town)
@@ -135,8 +150,7 @@ namespace Billing.Api.Models
                 TownId = customer.Town.Id
             };
         }
-
-
+        
         public Customer Create(CustomerModel model)
         {
             return new Customer()
@@ -144,9 +158,10 @@ namespace Billing.Api.Models
                 Id = model.Id,
                 Name = model.Name,
                 Address = model.Address,
+                Town = _unitOfWork.Towns.Get(model.TownId)
             };
         }
-
+        
         //Josip
         public InvoiceModel Create(Invoice invoice)
         {
