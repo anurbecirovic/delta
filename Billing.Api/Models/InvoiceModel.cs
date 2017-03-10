@@ -15,5 +15,8 @@ namespace Billing.Api.Models
         public string Customer { get; set; }
         public double Total { get; set; }
         public double Shipping { get; set; }
+        public int AgentId { get; set; }
+        public int ShipperId { get; set; }
+        public int CustomerId { get; set; }
     }
 }

@@ -118,7 +118,20 @@ namespace Billing.Api.Models
                 Id = shipper.Id,
                 Name = shipper.Name,
                 Address = shipper.Address,
-                Invoices = shipper.Invoices.Select(x => x.InvoiceNo).ToList()
+                Town = shipper.Town.Name,
+                Invoices = shipper.Invoices.Select(x => x.InvoiceNo).ToList(),
+                TownId=shipper.Town.Id
+            };
+        }
+
+        public Shipper Create(ShipperModel model)
+        {
+            return new Shipper()
+            {
+                Id=model.Id,
+                Name=model.Name,
+                Address=model.Address,
+                Town = _unitOfWork.Towns.Get(model.TownId)
             };
         }
 
@@ -144,6 +157,7 @@ namespace Billing.Api.Models
                 Id = model.Id,
                 Name = model.Name,
                 Address = model.Address,
+                Town=_unitOfWork.Towns.Get(model.TownId)
             };
         }
 
@@ -159,10 +173,27 @@ namespace Billing.Api.Models
                 Customer = invoice.Customer.Name,
                 Agent = invoice.Agent.Name,
                 Total = invoice.Total,
-                Shipping = invoice.Shipping
+                Shipping = invoice.Shipping,
+                ShipperId=invoice.Shipper.Id,
+                AgentId=invoice.Agent.Id,
+                CustomerId=invoice.Customer.Id
             };
         }
 
+        public Invoice Create(InvoiceModel model)
+        {
+            return new Invoice()
+            {
+                Id = model.Id,
+                InvoiceNo = model.InvoiceNo,
+                Date = model.Date,
+                Shipping=model.Shipping,
+                Agent = _unitOfWork.Agents.Get(model.AgentId),
+                Customer = _unitOfWork.Customers.Get(model.CustomerId),
+                Shipper = _unitOfWork.Shippers.Get(model.ShipperId)
+
+            };
+        }
     }
 }
 
